@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/07 15:51:54 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/07 22:11:34 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -50,34 +50,33 @@ static char	*ft_word_dup(char const *s, int start, int end)
 	return (arr);
 }
 
+void	memory_free();
 static char	**ft_splited_s(char const *s, char c)
 {
 	char	**arr;
-	int	i;
+	char	**strs;
 	int	start;
 	int	l_arr;
 	int	end;
 
 	l_arr = ft_wc(s, c);
 	arr = malloc((l_arr + 1) * sizeof(char *));
+	strs = arr;
 	if (!arr)
 		return (NULL);
-	i = 0;
 	end = 0;
-	while (s[end] && i < l_arr)
+	while (s[end] && l_arr > 0)
 	{
+		while (s[end] == c)
+			end++;
 		start = end;
-		while (s[end] == c && s[end] != '\0')
-		{
-			start++;
+		while (s[end] != c && s[end] != '\0')
 			end++;
-		}
-		while (s[end] != c && s[end] !=  '\0')
-			end++;
-		arr[i] = ft_word_dup(s, start,  end);
-		i++;
+		*arr = ft_word_dup(s, start, end);
+		arr++;
 	}
-	return (arr);
+	*arr = NULL;
+	return (strs);
 }
 char    **ft_split(char const *s, char c)
 {
@@ -85,5 +84,5 @@ char    **ft_split(char const *s, char c)
 }
 int main()
 {
-	printf("%d\n", ft_splitted_s(",,,,,,,,      yahya,,,,,,,,is,here,,,,,,,", ','));
+	printf("%s\n", ft_splited_s("yahya,,,,,,,,is,here,,,,,,,", ','));
 }

@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/08 21:07:09 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:23:27 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,11 @@ static char	**ft_memfree(char **strs, int l_arr)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**ft_fill_word(char const *s, char c, char **arr)
 {
-	char	**arr, (**strs);
-	int	start, (end), (l_arr), (i);
+	int		end, (i), (start);
+	char	**strs;
 
-	if (!s)
-		return (NULL);
-	l_arr = ft_wc(s, c);
-	arr = malloc((l_arr + 1) * sizeof(char *));
-	if (!arr)
-		return (NULL);
 	strs = arr;
 	end = 0;
 	i = 0;
@@ -90,11 +84,24 @@ char	**ft_split(char const *s, char c)
 		{
 			*arr = ft_word_dup(s, start, end);
 			if (*arr == NULL)
-				return (ft_memfree(strs, l_arr));
+				return (ft_memfree(strs, i));
 			arr++;
 			i++;
 		}
 	}
 	*arr = NULL;
 	return (strs);
+}
+char	**ft_split(char const *s, char c)
+{
+	char	**arr;
+	int	l_arr;
+
+	if (!s)
+		return (NULL);
+	l_arr = ft_wc(s, c);
+	arr = malloc((l_arr + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	return (ft_fill_word(s, c, arr));
 }

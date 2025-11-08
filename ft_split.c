@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/08 12:22:03 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 20:38:21 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int	ft_wc(char const *s, char c)
 	int	count;
 	int	i;
 	
-	if (!s)
-		return 0;
 	i = 0;
 	count = 0;
 	while (s[i])
@@ -94,16 +92,4 @@ char	**ft_split(char const *s, char c)
 	}
 	*arr = NULL;
 	return (strs);
-}
-int main()
-{
-  char	**c;
-  int i = 0;
-	
-  c = ft_split(",,ojpathahtanojaoy ,f,,,,", ',');
-  while (c[i])
-  {
-  	printf("%s\n" , c[i]);
-  	i++;
-  }
 }

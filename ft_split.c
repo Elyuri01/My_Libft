@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/08 20:38:21 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 20:54:42 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_wc(char const *s, char c)
 			 return (count);
 		 while (s[i] != c && s[i] != '\0')
                          i++;
-		 count++;
+		count++;
 	}
 	return(count);
 }
@@ -51,7 +51,7 @@ static char	*ft_word_dup(char const *s, int start, int end)
 	return (arr);
 }
 
-static char	*ft_memfree(char **strs, int l_arr)
+static char	**ft_memfree(char **strs, int l_arr)
 {
 	int	i;
 
@@ -87,9 +87,23 @@ char	**ft_split(char const *s, char c)
 			end++;
 		*arr = ft_word_dup(s, start, end);
 		if (*arr == NULL)
-			ft_memfree(strs, l_arr);
+			return (ft_memfree(strs, l_arr));
 		arr++;
 	}
 	*arr = NULL;
 	return (strs);
+}
+
+int main()
+{
+	int	i;
+	char **arr;
+
+	i = 0;
+	arr = ft_split(",,hello,,wi=ir===,,", ',');
+	while (arr[i])
+	{
+		printf("%s", arr[i]);
+		i++;
+	}
 }

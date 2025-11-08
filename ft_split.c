@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/08 20:54:42 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:07:09 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	**ft_memfree(char **strs, int l_arr)
 char	**ft_split(char const *s, char c)
 {
 	char	**arr, (**strs);
-	int	start, (end), (l_arr);
+	int	start, (end), (l_arr), (i);
 
 	if (!s)
 		return (NULL);
@@ -78,6 +78,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	strs = arr;
 	end = 0;
+	i = 0;
 	while (s[end])
 	{
 		while (s[end] == c)
@@ -85,25 +86,15 @@ char	**ft_split(char const *s, char c)
 		start = end;
 		while (s[end] != c && s[end] != '\0')
 			end++;
-		*arr = ft_word_dup(s, start, end);
-		if (*arr == NULL)
-			return (ft_memfree(strs, l_arr));
-		arr++;
+		if (start < end)
+		{
+			*arr = ft_word_dup(s, start, end);
+			if (*arr == NULL)
+				return (ft_memfree(strs, l_arr));
+			arr++;
+			i++;
+		}
 	}
 	*arr = NULL;
 	return (strs);
-}
-
-int main()
-{
-	int	i;
-	char **arr;
-
-	i = 0;
-	arr = ft_split(",,hello,,wi=ir===,,", ',');
-	while (arr[i])
-	{
-		printf("%s", arr[i]);
-		i++;
-	}
 }

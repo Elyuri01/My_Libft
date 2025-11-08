@@ -6,9 +6,10 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/07 22:11:34 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 12:22:03 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_wc(char const *s, char c)
@@ -16,11 +17,13 @@ static int	ft_wc(char const *s, char c)
 	int	count;
 	int	i;
 	
+	if (!s)
+		return 0;
 	i = 0;
 	count = 0;
 	while (s[i])
 	{
-		 while (s[i] == c)
+		 while (s[i] && s[i] == c)
 			 i++;
 		 if (s[i] == '\0')
 			 return (count);
@@ -50,22 +53,34 @@ static char	*ft_word_dup(char const *s, int start, int end)
 	return (arr);
 }
 
-void	memory_free();
-static char	**ft_splited_s(char const *s, char c)
+static char	*ft_memfree(char **strs, int l_arr)
 {
-	char	**arr;
-	char	**strs;
-	int	start;
-	int	l_arr;
-	int	end;
+	int	i;
 
+	i = 0;
+	while (i < l_arr)
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+	return (NULL);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**arr, (**strs);
+	int	start, (end), (l_arr);
+
+	if (!s)
+		return (NULL);
 	l_arr = ft_wc(s, c);
 	arr = malloc((l_arr + 1) * sizeof(char *));
-	strs = arr;
 	if (!arr)
 		return (NULL);
+	strs = arr;
 	end = 0;
-	while (s[end] && l_arr > 0)
+	while (s[end])
 	{
 		while (s[end] == c)
 			end++;
@@ -73,16 +88,22 @@ static char	**ft_splited_s(char const *s, char c)
 		while (s[end] != c && s[end] != '\0')
 			end++;
 		*arr = ft_word_dup(s, start, end);
+		if (*arr == NULL)
+			ft_memfree(strs, l_arr);
 		arr++;
 	}
 	*arr = NULL;
 	return (strs);
 }
-char    **ft_split(char const *s, char c)
-{
-
-}
 int main()
 {
-	printf("%s\n", ft_splited_s("yahya,,,,,,,,is,here,,,,,,,", ','));
+  char	**c;
+  int i = 0;
+	
+  c = ft_split(",,ojpathahtanojaoy ,f,,,,", ',');
+  while (c[i])
+  {
+  	printf("%s\n" , c[i]);
+  	i++;
+  }
 }

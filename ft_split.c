@@ -6,7 +6,7 @@
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:46:27 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/08 21:23:27 by yelallam         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:35:34 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,28 @@ static int	ft_wc(char const *s, char c)
 {
 	int	count;
 	int	i;
-	
+
 	i = 0;
 	count = 0;
 	while (s[i])
 	{
-		 while (s[i] && s[i] == c)
-			 i++;
-		 if (s[i] == '\0')
-			 return (count);
-		 while (s[i] != c && s[i] != '\0')
-                         i++;
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] == '\0')
+			return (count);
+		while (s[i] != c && s[i] != '\0')
+			i++;
 		count++;
 	}
-	return(count);
+	return (count);
 }
 
 static char	*ft_word_dup(char const *s, int start, int end)
 {
 	char	*arr;
-	int	i;
-	
-	arr = malloc (end - start + 1);
+	int		i;
+
+	arr = malloc(end - start + 1);
 	if (!arr)
 		return (NULL);
 	i = 0;
@@ -67,9 +67,9 @@ static char	**ft_memfree(char **strs, int l_arr)
 
 static char	**ft_fill_word(char const *s, char c, char **arr)
 {
-	int		end, (i), (start);
 	char	**strs;
 
+	int i, (start), (end);
 	strs = arr;
 	end = 0;
 	i = 0;
@@ -92,10 +92,11 @@ static char	**ft_fill_word(char const *s, char c, char **arr)
 	*arr = NULL;
 	return (strs);
 }
+
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	int	l_arr;
+	int		l_arr;
 
 	if (!s)
 		return (NULL);

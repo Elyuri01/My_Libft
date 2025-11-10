@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelallam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/31 19:41:42 by yelallam          #+#    #+#             */
-/*   Updated: 2025/11/10 17:59:46 by yelallam         ###   ########.fr       */
+/*   Created: 2025/11/09 18:12:56 by yelallam          #+#    #+#             */
+/*   Updated: 2025/11/09 18:58:43 by yelallam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*ptr;
-	size_t			i;
+	char	*arr;
 
-	ptr = s;
+	size_t l_s1, (l_s2), (i), (j);
+	if (!s1 || !s2)
+		return (NULL);
 	i = 0;
-	while (i < n)
+	l_s1 = ft_strlen(s1);
+	l_s2 = ft_strlen(s2);
+	arr = malloc(l_s1 + l_s2 + 1);
+	if (!arr)
+		return (NULL);
+	j = 0;
+	while (s1[i])
 	{
-		ptr[i] = (unsigned char) c;
+		arr[i] = s1[i];
 		i++;
 	}
-	return (s);
+	while (s2[j])
+	{
+		arr[i] = s2[j];
+		i++;
+		j++;
+	}
+	arr[i] = '\0';
+	return (arr);
 }
